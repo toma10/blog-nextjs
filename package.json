@@ -8,8 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "date-fns": "^2.13.0",
+    "glob": "^7.1.6",
+    "gray-matter": "^4.0.2",
     "next": "9.3.6",
+    "raw-loader": "^4.0.1",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-markdown": "^4.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/ui": "^0.3.0",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.4.5"
   }
 }
