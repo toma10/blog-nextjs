@@ -1,9 +1,9 @@
-import Content from "../components/Content";
-import Heading from "../components/Heading";
-import Page from "../components/Page";
-import Paragraph from "../components/Paragraph";
+import Content from "@/components/Content";
+import Heading from "@/components/Heading";
+import Page from "@/components/Page";
+import Paragraph from "@/components/Paragraph";
 import React from "react";
-import Title from "../components/Title";
+import Title from "@/components/Title";
 
 export default function About() {
   return (

@@ -1,16 +1,23 @@
-import Content from "../components/Content";
-import DateTime from "../components/DateTime";
-import Heading from "../components/Heading";
+import Content from "@/components/Content";
+import DateTime from "@/components/DateTime";
+import Heading from "@/components/Heading";
 import Link from "next/link";
-import Page from "../components/Page";
-import Paragraph from "../components/Paragraph";
+import Page from "@/components/Page";
+import Paragraph from "@/components/Paragraph";
 import React from "react";
-import StyledLink from "../components/StyledLink";
-import Subtitle from "../components/Subtitle";
-import Title from "../components/Title";
-import { excerpt } from "../helpers";
+import StyledLink from "@/components/StyledLink";
+import Subtitle from "@/components/Subtitle";
+import Title from "@/components/Title";
+import { allPosts } from "@/lib/post-queries";
 import { format } from "date-fns";
-import matter from "gray-matter";
+
+export async function getStaticProps() {
+  return {
+    props: {
+      posts: await allPosts(),
+    },
+  };
+}
 
 function Post({ post }) {
   return (
@@ -50,40 +57,4 @@ export default function Home({ posts }) {
       </Content>
     </Page>
   );
-}
-
-export async function getStaticProps() {
-  const posts = ((context) => {
-    const keys = context.keys();
-    const values = keys.map(context);
-
-    const data = keys.map((key, index) => {
-      const value = values[index];
-      const document = matter(value.default);
-
-      const slug = key
-        .replace(/^.*[\\\/]/, "")
-        .split(".")
-        .slice(0, -1)
-        .join(".");
-
-      return {
-        frontmatter: document.data,
-        markdownBody: document.content,
-        slug,
-        excerpt: excerpt(document.content),
-      };
-    });
-
-    return data;
-  })(require.context("../posts", true, /\.md$/));
-
-  return {
-    props: {
-      posts: posts.sort(
-        (postA, postB) =>
-          new Date(postB.frontmatter.date) - new Date(postA.frontmatter.date)
-      ),
-    },
-  };
 }

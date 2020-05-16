@@ -1,7 +1,7 @@
 import Head from "next/head";
 import PropTypes from "prop-types";
 import React from "react";
-import config from "../config";
+import config from "@/config";
 import { useRouter } from "next/router";
 
 export default function SEO({ title, description, article }) {
